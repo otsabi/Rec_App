@@ -15,6 +15,7 @@ class ResponsableController extends Controller
     public function index()
     {
         //
+        return view("responsables.responsable_add");
     }
 
     /**
@@ -25,6 +26,21 @@ class ResponsableController extends Controller
     public function create()
     {
         //
+        $responsable = new Responsable();
+
+        $responsable->nom = $request->input('nom');
+        $responsable->prenom = $request->input('prenom');
+        $responsable->tel = $request->input('tel');
+
+
+        $ville = $request->input('ville');
+        $responsable->idVille = Functions::getIdVille($ville);
+
+        
+        $responsable->save();
+
+        return redirect()->back()->with('status','Responsable ajouté avec succès.');
+
     }
 
     /**

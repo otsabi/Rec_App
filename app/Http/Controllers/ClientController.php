@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\client;
@@ -25,6 +26,8 @@ class ClientController extends Controller
     public function create()
     {
         //
+        
+        return view("clients.client_add");
     }
 
     /**
@@ -36,6 +39,30 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         //
+        $client = new Client();
+
+        $client->nom = $request->input('nom');
+        $client->raison =$request->input('raison');
+        $client->adresse =$request->input('adresse');
+        $client->tel = $request->input('tel');
+        $client->fax = $request->input('fax');
+        $client->email =$request->input('email');
+
+        
+        $responsable = $request->input('responsable');
+        $client->idResponsable = Functions::getIdResponsable($responsable);
+
+
+        $ville = $request->input('ville');
+        $client->idVille = Functions::getIdVille($ville);
+
+        $typeclient = $request->input('typec');
+        $client->typeClient = Functions::getIdVille($typeclient);
+        
+        $client->save();
+
+        return redirect()->back()->with('status','Client ajouté avec succès.');
+
     }
 
     /**

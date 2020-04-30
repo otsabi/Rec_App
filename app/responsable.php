@@ -7,4 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class responsable extends Model
 {
     //
+    public function clients(){
+        return $this->hasMany('APP\Client');
+    }
 }
