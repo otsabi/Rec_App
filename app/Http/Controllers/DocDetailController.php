@@ -25,6 +25,8 @@ class DocDetailController extends Controller
     public function create()
     {
         //
+        return view("docdetails.docdetails_add");
+
     }
 
     /**
@@ -36,6 +38,23 @@ class DocDetailController extends Controller
     public function store(Request $request)
     {
         //
+        $docdetail = new DocDetail();
+
+        $docdetail->date = $request->input('date');
+        $docdetail->date_echeance =$request->input('dateech');
+        $docdetail->paye =$request->input('paye');
+        $docdetail->idClient = $request->input('client');
+        $docdetail->idSociete = $request->input('societe');
+
+        
+
+        $typefacture = $request->input('typefact');
+        $docdetail->IdTypeDocDetail = Functions::getIdTypeDocDetail($typefacture);
+        
+        $docdetail->save();
+
+        return redirect()->back()->with('status','Facture  ajoutée avec succès.');
+
     }
 
     /**

@@ -15,6 +15,7 @@ class SocieteController extends Controller
     public function index()
     {
         //
+
     }
 
     /**
@@ -25,6 +26,7 @@ class SocieteController extends Controller
     public function create()
     {
         //
+        return view("societes.societe_add");
     }
 
     /**
@@ -36,6 +38,19 @@ class SocieteController extends Controller
     public function store(Request $request)
     {
         //
+        $societe = new Societe();
+
+        $societe->nom = $request->input('nom');
+        $societe->ice =$request->input('ice');
+        $societe->idFiscal =$request->input('idfisc');
+        $societe->patente = $request->input('patente');
+        $societe->rc = $request->input('rc');
+        
+        
+        $societe->save();
+
+        return redirect()->back()->with('status','Société ajoutée avec succès.');
+
     }
 
     /**

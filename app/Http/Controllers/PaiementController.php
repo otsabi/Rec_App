@@ -15,6 +15,7 @@ class PaiementController extends Controller
     public function index()
     {
         //
+
     }
 
     /**
@@ -25,6 +26,7 @@ class PaiementController extends Controller
     public function create()
     {
         //
+        return view("paiements.paiement_add");
     }
 
     /**
@@ -36,6 +38,25 @@ class PaiementController extends Controller
     public function store(Request $request)
     {
         //
+        $paiement = new Paiement();
+
+        $client->montant = $request->input('montant');
+        $client->date =$request->input('date');
+        
+
+        
+        $docdetail = $request->input('numfact');
+        $docdetail->idDocDetail = Functions::getDocDetailId($docdetail);
+
+
+        $paiement = $request->input('typep');
+        $paiement->idTypePaiement = Functions::getIdTypePaiement($paiement);
+
+        
+        $paiement->save();
+
+        return redirect()->back()->with('status','Paiement ajouté avec succès.');
+
     }
 
     /**
