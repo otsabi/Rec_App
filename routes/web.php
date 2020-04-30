@@ -20,3 +20,6 @@ Route::get('/', function () {
 Route::get('/template', function () {
     return view('index');
 });
+
+// route invoice
+Route::get('invoice','invoiceController@show');
